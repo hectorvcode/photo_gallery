@@ -1,14 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Carrito de Compras
-    </ion-title>
+    <ion-title> Carrito de Compras </ion-title>
     <ion-buttons slot="end">
       <ion-button
         fill="clear"
         (click)="clearCart()"
         [disabled]="cartItems.length === 0"
-        color="danger">
+        color="danger"
+      >
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -29,7 +28,11 @@
         <ion-item class="cart-item">
           <div class="item-content">
             <div class="product-image-container">
-              <img [src]="item.product.image" [alt]="item.product.title" class="product-image">
+              <img
+                [src]="item.product.image"
+                [alt]="item.product.title"
+                class="product-image"
+              />
             </div>
 
             <div class="product-details">
@@ -37,7 +40,9 @@
               <p class="product-category">{{ item.product.category }}</p>
               <div class="price-info">
                 <span class="unit-price">${{ item.product.price }}</span>
-                <span class="subtotal">${{ getItemSubtotal(item).toFixed(2) }}</span>
+                <span class="subtotal"
+                  >${{ getItemSubtotal(item).toFixed(2) }}</span
+                >
               </div>
             </div>
           </div>
@@ -47,7 +52,8 @@
               fill="clear"
               size="small"
               (click)="updateQuantity(item, item.quantity - 1)"
-              [disabled]="item.quantity <= 1">
+              [disabled]="item.quantity <= 1"
+            >
               <ion-icon name="remove"></ion-icon>
             </ion-button>
 
@@ -56,8 +62,18 @@
             <ion-button
               fill="clear"
               size="small"
-              (click)="updateQuantity(item, item.quantity + 1)">
+              (click)="updateQuantity(item, item.quantity + 1)"
+            >
               <ion-icon name="add"></ion-icon>
+            </ion-button>
+
+            <ion-button
+              fill="clear"
+              size="small"
+              color="danger"
+              (click)="confirmRemoveItem(item)"
+            >
+              <ion-icon name="trash"></ion-icon>
             </ion-button>
           </div>
         </ion-item>
@@ -75,17 +91,22 @@
       <ion-card>
         <ion-card-content>
           <div class="summary-row">
-            <span>Subtotal ({{ cartItems.length }} {{ cartItems.length === 1 ? 'producto' : 'productos' }}):</span>
+            <span
+              >Subtotal ({{ cartItems.length }} {{ cartItems.length === 1 ?
+              'producto' : 'productos' }}):</span
+            >
             <span class="amount">${{ cartTotal.toFixed(2) }}</span>
           </div>
           <div class="summary-row">
             <span>Envío:</span>
             <span class="amount">Gratis</span>
           </div>
-          <hr>
+          <hr />
           <div class="summary-row total">
             <span><strong>Total:</strong></span>
-            <span class="amount"><strong>${{ cartTotal.toFixed(2) }}</strong></span>
+            <span class="amount"
+              ><strong>${{ cartTotal.toFixed(2) }}</strong></span
+            >
           </div>
         </ion-card-content>
       </ion-card>
@@ -94,7 +115,8 @@
         expand="block"
         size="large"
         (click)="checkout()"
-        class="checkout-btn">
+        class="checkout-btn"
+      >
         <ion-icon name="card" slot="start"></ion-icon>
         Proceder al Pago
       </ion-button>
@@ -107,7 +129,11 @@
       <ion-icon name="cart-outline" size="large" color="medium"></ion-icon>
       <h2>Tu carrito está vacío</h2>
       <p>Agrega productos desde el catálogo para comenzar tu compra.</p>
-      <ion-button routerLink="/tabs/tab2" fill="outline">
+      <ion-button
+        routerLink="/tabs/tab2"
+        fill="outline"
+        class="view-products-btn"
+      >
         <ion-icon name="storefront" slot="start"></ion-icon>
         Ver Productos
       </ion-button>

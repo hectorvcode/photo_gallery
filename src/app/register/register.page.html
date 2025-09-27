@@ -8,7 +8,7 @@
   <div class="register-container">
     <div class="logo-container">
       <ion-icon name="camera" size="large" color="primary"></ion-icon>
-      <h1>Photo Gallery</h1>
+      <h1>Tienda Online</h1>
       <p>Crea tu cuenta</p>
     </div>
 
@@ -20,19 +20,21 @@
           name="displayName"
           type="text"
           autocomplete="name"
-          [disabled]="isLoading">
+          [disabled]="isLoading"
+        >
         </ion-input>
       </ion-item>
 
       <ion-item lines="full" class="input-item">
-        <ion-label position="floating">Email *</ion-label>
+        <ion-label position="floating">Correo electrónico *</ion-label>
         <ion-input
           [(ngModel)]="email"
           name="email"
           type="email"
           required
           autocomplete="email"
-          [disabled]="isLoading">
+          [disabled]="isLoading"
+        >
         </ion-input>
       </ion-item>
 
@@ -44,7 +46,8 @@
           type="password"
           required
           autocomplete="new-password"
-          [disabled]="isLoading">
+          [disabled]="isLoading"
+        >
         </ion-input>
       </ion-item>
 
@@ -56,7 +59,8 @@
           type="password"
           required
           autocomplete="new-password"
-          [disabled]="isLoading">
+          [disabled]="isLoading"
+        >
         </ion-input>
       </ion-item>
 
@@ -70,7 +74,8 @@
         expand="block"
         type="submit"
         class="register-button"
-        [disabled]="isLoading || !email || !password || !confirmPassword">
+        [disabled]="isLoading || !email || !password || !confirmPassword"
+      >
         <ion-icon name="person-add" slot="start"></ion-icon>
         Crear Cuenta
       </ion-button>
@@ -82,7 +87,8 @@
         fill="clear"
         routerLink="/login"
         [disabled]="isLoading"
-        class="login-button">
+        class="login-button"
+      >
         <ion-icon name="log-in" slot="start"></ion-icon>
         Iniciar Sesión
       </ion-button>

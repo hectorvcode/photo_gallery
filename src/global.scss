@@ -35,3 +35,26 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/*
+ * Global page width constraint
+ * Centers the main content of every page and limits its max width.
+ * Adjust --app-max-content-width as needed.
+ */
+:root {
+  --app-max-content-width: 680px;
+}
+
+/* Apply to all direct children rendered inside ion-content */
+ion-content > :not([slot]) {
+  max-width: var(--app-max-content-width);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* Optional: consistent horizontal padding for content areas */
+ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+}

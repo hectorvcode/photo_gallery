@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Perfil de Usuario
-    </ion-title>
+    <ion-title>Perfil</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logout()" fill="clear" color="danger">
         <ion-icon name="log-out"></ion-icon>
@@ -54,7 +52,8 @@
           <ion-icon
             [name]="userData.emailVerified ? 'checkmark-circle' : 'alert-circle'"
             [color]="userData.emailVerified ? 'success' : 'warning'"
-            slot="start">
+            slot="start"
+          >
           </ion-icon>
           <ion-label>
             <h3>Estado del Email</h3>
@@ -77,23 +76,18 @@
         expand="block"
         fill="outline"
         *ngIf="!userData.emailVerified"
-        (click)="sendEmailVerification()">
+        (click)="sendEmailVerification()"
+      >
         <ion-icon name="mail" slot="start"></ion-icon>
         Verificar Email
       </ion-button>
 
-      <ion-button
-        expand="block"
-        fill="outline"
-        (click)="reloadUserData()">
+      <ion-button expand="block" fill="outline" (click)="reloadUserData()">
         <ion-icon name="refresh" slot="start"></ion-icon>
         Actualizar Datos
       </ion-button>
 
-      <ion-button
-        expand="block"
-        color="danger"
-        (click)="logout()">
+      <ion-button expand="block" color="danger" (click)="logout()">
         <ion-icon name="log-out" slot="start"></ion-icon>
         Cerrar Sesión
       </ion-button>
@@ -103,5 +97,5 @@
   <div class="loading-state" *ngIf="!userData">
     <ion-spinner name="circles"></ion-spinner>
     <p>Cargando información del usuario...</p>
-  </div>
-</ion-content>clear
+  </div> </ion-content
+>clear

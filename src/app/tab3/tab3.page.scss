@@ -188,6 +188,23 @@
       --border-radius: 12px;
       font-weight: 600;
     }
+
+    .view-products-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      --padding-start: 16px;
+      --padding-end: 16px;
+
+      ion-icon {
+        font-size: 18px;
+        margin: 0;
+        margin-inline-end: 1rem !important; // asegurar separación en Ionic
+        margin-right: 1rem !important; // fallback LTR
+      }
+    }
   }
 }
 
