@@ -10,7 +10,7 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   deleteUser,
-  updatePassword
+  updatePassword,
 } from '@angular/fire/auth';
 import { from, Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export interface UserData {
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
-  public isAuthenticated$ = this.currentUser$.pipe(map(user => !!user));
+  public isAuthenticated$ = this.currentUser$.pipe(map((user) => !!user));
 
   constructor(private auth: Auth) {
     // Escuchar cambios en el estado de autenticación
@@ -36,7 +36,11 @@ export class AuthService {
   }
 
   // Registro con email y contraseña
-  register(email: string, password: string, displayName?: string): Observable<any> {
+  register(
+    email: string,
+    password: string,
+    displayName?: string
+  ): Observable<any> {
     return from(
       createUserWithEmailAndPassword(this.auth, email, password).then(
         async (result) => {
@@ -68,13 +72,13 @@ export class AuthService {
   // Obtener datos del usuario actual como observable
   getCurrentUserData(): Observable<UserData | null> {
     return this.currentUser$.pipe(
-      map(user => {
+      map((user) => {
         if (!user) return null;
         return {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName,
-          emailVerified: user.emailVerified
+          emailVerified: user.emailVerified,
         };
       })
     );

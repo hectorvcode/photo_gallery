@@ -4,7 +4,6 @@ import {
   LoadingController,
   AlertController,
   ToastController,
-  IonicSafeString,
 } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +25,8 @@ export class Tab2Page implements OnInit, OnDestroy {
   searchTerm: string = '';
   isLoading = false;
   cartItemCount = 0;
+  selectedProduct: Product | null = null;
+  isProductModalOpen = false;
 
   private subscriptions: Subscription[] = [];
 
@@ -156,39 +157,13 @@ export class Tab2Page implements OnInit, OnDestroy {
     await alert.present();
   }
 
-  async showProductDetails(product: Product) {
-    const alert = await this.alertController.create({
-      header: product.title,
-      message: new IonicSafeString(`
-        <div style="text-align: center;">
-          <img src="${
-            product.image
-          }" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;">
-          <p><strong>Precio:</strong> $${product.price}</p>
-          <p><strong>Categoría:</strong> ${this.getCategoryDisplayName(
-            product.category
-          )}</p>
-          <p><strong>Rating:</strong> ${product.rating.rate} ⭐ (${
-        product.rating.count
-      } reseñas)</p>
-          <p style="margin-top: 10px;">${product.description}</p>
-        </div>
-      `),
-      buttons: [
-        {
-          text: 'Cerrar',
-          role: 'cancel',
-        },
-        {
-          text: 'Agregar al Carrito',
-          handler: () => {
-            this.addToCart(product);
-          },
-        },
-      ],
-    });
+  showProductDetails(product: Product) {
+    this.selectedProduct = product;
+    this.isProductModalOpen = true;
+  }
 
-    await alert.present();
+  closeProductModal() {
+    this.isProductModalOpen = false;
   }
 
   async refreshProducts(event: any) {

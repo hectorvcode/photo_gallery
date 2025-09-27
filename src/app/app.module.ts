@@ -35,7 +35,6 @@ import { environment } from '../environments/environment.local';
       try {
         return initializeAuth(app, { persistence: indexedDBLocalPersistence });
       } catch {
-        // Fallback a la instancia existente si ya fue inicializada o si IndexedDB falla
         return getFirebaseAuth(app);
       }
     }),
