@@ -1,23 +1,115 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Photo Gallery </ion-title>
+    <ion-title>
+      Catálogo de Productos
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="loadData()" fill="clear">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" [disabled]="cartItemCount === 0">
+        <ion-icon name="cart"></ion-icon>
+        <ion-badge color="danger" *ngIf="cartItemCount > 0">{{ cartItemCount }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col
-        size="6"
-        *ngFor="let photo of photoService.photos; index as position"
-      >
-        <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"></ion-img>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="addPhotoToGallery()">
-      <ion-icon name="camera"></ion-icon>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Productos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Filtros y Búsqueda -->
+  <div class="filters-container ion-padding">
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchChange()"
+      placeholder="Buscar productos..."
+      show-clear-button="focus">
+    </ion-searchbar>
+
+    <ion-select
+      [(ngModel)]="selectedCategory"
+      (ionSelectionChange)="onCategoryChange()"
+      placeholder="Categoría"
+      interface="popover">
+      <ion-select-option *ngFor="let category of categories" [value]="category.name">
+        {{ category.displayName }}
+      </ion-select-option>
+    </ion-select>
+  </div>
+
+  <!-- Pull to Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="refreshProducts($event)">
+    <ion-refresher-content
+      pulling-icon="chevron-down-circle-outline"
+      pulling-text="Arrastra para actualizar"
+      refreshing-spinner="circles"
+      refreshing-text="Actualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="isLoading">
+    <ion-spinner name="circles"></ion-spinner>
+    <p>Cargando productos...</p>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="products-container" *ngIf="!isLoading">
+    <div class="products-grid">
+      <ion-card
+        *ngFor="let product of filteredProducts; trackBy: trackByProductId"
+        class="product-card"
+        (click)="showProductDetails(product)">
+
+        <div class="product-image-container">
+          <img [src]="product.image" [alt]="product.title" class="product-image">
+          <div class="product-rating">
+            <ion-icon name="star" color="warning"></ion-icon>
+            <span>{{ product.rating.rate }}</span>
+          </div>
+        </div>
+
+        <ion-card-content>
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-category">{{ getCategoryDisplayName(product.category) }}</p>
+
+          <div class="product-footer">
+            <div class="product-price">
+              <span class="price">${{ product.price }}</span>
+            </div>
+            <ion-button
+              fill="clear"
+              size="small"
+              (click)="addToCart(product); $event.stopPropagation()"
+              class="add-to-cart-btn">
+              <ion-icon name="cart" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredProducts.length === 0 && !isLoading">
+      <ion-icon name="search" size="large" color="medium"></ion-icon>
+      <h3>No se encontraron productos</h3>
+      <p>Intenta con otros términos de búsqueda o selecciona una categoría diferente.</p>
+      <ion-button fill="outline" (click)="selectedCategory = 'all'; searchTerm = ''; filterProducts()">
+        Mostrar Todos
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Floating Action Button para ver carrito -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="cartItemCount > 0">
+    <ion-fab-button color="primary">
+      <ion-icon name="cart"></ion-icon>
+      <ion-badge color="danger">{{ cartItemCount }}</ion-badge>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

@@ -47,7 +47,7 @@ export class LoginPage {
       next: async () => {
         await loading.dismiss();
         this.isLoading = false;
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/tabs/tab2']);
       },
       error: async (error) => {
         await loading.dismiss();

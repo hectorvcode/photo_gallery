@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: process.env['NG_APP_FIREBASE_API_KEY'] || '',
-    authDomain: process.env['NG_APP_FIREBASE_AUTH_DOMAIN'] || '',
-    projectId: process.env['NG_APP_FIREBASE_PROJECT_ID'] || '',
-    storageBucket: process.env['NG_APP_FIREBASE_STORAGE_BUCKET'] || '',
-    messagingSenderId: process.env['NG_APP_FIREBASE_MESSAGING_SENDER_ID'] || '',
-    appId: process.env['NG_APP_FIREBASE_APP_ID'] || '',
-    measurementId: process.env['NG_APP_FIREBASE_MEASUREMENT_ID'] || '',
+    apiKey: 'YOUR_API_KEY_HERE',
+    authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
+    projectId: 'YOUR_PROJECT_ID',
+    storageBucket: 'YOUR_PROJECT_ID.firebasestorage.app',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    appId: 'YOUR_APP_ID',
+    measurementId: 'YOUR_MEASUREMENT_ID',
   }
 };
 

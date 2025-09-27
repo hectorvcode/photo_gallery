@@ -17,7 +17,7 @@ export class RedirectIfAuthenticatedGuard implements CanActivate {
       map(isAuthenticated => {
         if (isAuthenticated) {
           // Si ya está autenticado, redirigir a la página principal
-          return this.router.createUrlTree(['/tabs/tab1']);
+          return this.router.createUrlTree(['/tabs/tab2']);
         } else {
           // Si no está autenticado, permitir acceso a login/register
           return true;
