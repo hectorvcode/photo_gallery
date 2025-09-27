@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <div class="logo-container">
+      <ion-icon name="camera" size="large" color="primary"></ion-icon>
+      <h1>Photo Gallery</h1>
+      <p>Bienvenido de vuelta</p>
+    </div>
+
+    <form (ngSubmit)="login()" class="login-form">
+      <ion-item lines="full" class="input-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          [disabled]="isLoading">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="full" class="input-item">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          required
+          autocomplete="current-password"
+          [disabled]="isLoading">
+        </ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="login-button"
+        [disabled]="isLoading || !email || !password">
+        <ion-icon name="log-in" slot="start"></ion-icon>
+        Iniciar Sesión
+      </ion-button>
+
+      <ion-button
+        fill="clear"
+        expand="block"
+        (click)="resetPassword()"
+        [disabled]="isLoading"
+        class="forgot-password-button">
+        ¿Olvidaste tu contraseña?
+      </ion-button>
+    </form>
+
+    <div class="register-link">
+      <p>¿No tienes cuenta?</p>
+      <ion-button
+        fill="clear"
+        routerLink="/register"
+        [disabled]="isLoading"
+        class="register-button">
+        <ion-icon name="person-add" slot="start"></ion-icon>
+        Crear cuenta
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
